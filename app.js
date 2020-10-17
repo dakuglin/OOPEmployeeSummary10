@@ -1,6 +1,6 @@
-// const Manager = require("./lib/Manager");
-// const Engineer = require("./lib/Engineer");
-// const Intern = require("./lib/Intern");
+const Manager = require("./lib/Manager");
+const Engineer = require("./lib/Engineer");
+const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
@@ -63,7 +63,7 @@ const engineerQuestions = [ // array of questions for user
     {
     type: "input", 
     message: "Please enter engineer GitHub username: ", //question 
-    name: "engineerUsername", //variable name
+    name: "GitHubUser", //variable name
     },
 
 ];
@@ -91,12 +91,12 @@ const internQuestions = [ // array of questions for user
 
 ];
 
-function handleManagerQuestions() {
+function handleManagerQuestions() { //function to handle all of manager questions
 
     inquirer.prompt(managerQuestions) 
-    .then(function(response) {
+    .then(function(managerresponse) {
         
-         addEmployee();
+         addEmployee(); //directing manager to add employee function 
         
     });
 };
@@ -104,39 +104,41 @@ function handleManagerQuestions() {
 handleManagerQuestions()
 
 
-function addEmployee() {
+function addEmployee() { //function to handle user inputing different employees
 
     inquirer.prompt(employeeType) 
     .then(function(response) {
         
-        if (response.employeeType === "Engineer") {
+        if (response.employeeType === "Engineer") { //if enginneer is selected 
             handleEngineerQuestions();
         } 
-        else if (response.employeeType === "Intern") {
+        else if (response.employeeType === "Intern") { //if intern is selected 
             handleInternQuestions();
         }
-        else if (response.employeeType ==="No more employees to add!") {
-            console.log("We will end the questions process")
+        else if (response.employeeType === "No more employees to add!") { //no more employees to add
+            console.log("Thank you for providing the employee information!")
+            //render HTML
         }
      
     });
 };
 
-function handleEngineerQuestions() {
+function handleEngineerQuestions() { //function to handle user inputing enginner data
     inquirer.prompt(engineerQuestions) 
-    .then(function(response) {
-        
-         addEmployee()
+    .then(function(responseEngineer) {
+
+        console.log(responseEngineer);
+        addEmployee();
         
     });
 
 };
 
-function handleInternQuestions() {
+function handleInternQuestions() { //function to 
     inquirer.prompt(engineerQuestions) 
     .then(function(response) {
-        
-         addEmployee()
+    
+         addEmployee();
         
     });
 
