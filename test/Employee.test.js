@@ -1,7 +1,5 @@
 const Employee = require('../lib/Employee');
 
-//focus on this when we try and build out the constructor functions!!!!!!!!!!!!!!!!!!!
-
 test('Can instantiate Employee instance', () => {
   const e = new Employee();
   expect(typeof (e)).toBe('object');  //when you create a new employee do you get back an object

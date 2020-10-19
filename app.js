@@ -5,32 +5,50 @@ const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
 
-const OUTPUT_DIR = path.resolve(__dirname, "output");
-const outputPath = path.join(OUTPUT_DIR, "team.html");
+const OUTPUT_DIR = path.resolve(__dirname, "output"); //make this folder if it does not exist
+const outputPath = path.join(OUTPUT_DIR, "team.html"); //
+
+const teamMembers = [];
+const idArray = [];
 
 const render = require("./lib/htmlRenderer");
 
+function renderHTML() {
+
+    if (!fs.existsSync(OUTPUT_DIR)) {  //if it doesn not exist we are going to make it 
+        fs.mkdirSync(OUTPUT_DIR)
+      }
+    
+    fs.writeFile(outputPath, render(teamMembers), "utf-8", function(err) {
+        if (err) {
+            console.log("Error!");
+        }
+        console.log("Success!");
+    
+    })
+
+}
 
 const managerQuestions = [ // array of questions for user
     {
     type: "input",
     message: "What is the name of the manager?", //question 
-    name: "managerName", //variable name
+    name: "name", //variable name
     },
     {
     type: "input", 
     message: "Please provide the manager id number: ", //question 
-    name: "managerId", //variable name
+    name: "id", //variable name
     },
     {
     type: "input", 
     message: "Please enter the manager email: ", //question 
-    name: "managerEmail", //variable name
+    name: "email", //variable name
     },
     {
     type: "input", 
     message: "Please enter manager office number: ", //question 
-    name: "managerOffice", //variable name
+    name: "officeNumber", //variable name
     },
 
 ];
@@ -48,22 +66,22 @@ const engineerQuestions = [ // array of questions for user
     {
     type: "input",
     message: "What is the name of the engineer?", //question 
-    name: "engineerName", //variable name
+    name: "name", //variable name
     },
     {
     type: "input", 
     message: "Please provide the engineer id number: ", //question 
-    name: "engineerId", //variable name
+    name: "id", //variable name
     },
     {
     type: "input", 
     message: "Please enter the engineer email: ", //question 
-    name: "engineerEmail", //variable name
+    name: "email", //variable name
     },
     {
     type: "input", 
     message: "Please enter engineer GitHub username: ", //question 
-    name: "GitHubUser", //variable name
+    name: "github", //variable name
     },
 
 ];
@@ -71,22 +89,22 @@ const internQuestions = [ // array of questions for user
     {
     type: "input",
     message: "What is the name of the intern?", //question 
-    name: "internName", //variable name
+    name: "name", //variable name
     },
     {
     type: "input", 
     message: "Please provide the intern id number: ", //question 
-    name: "internId", //variable name
+    name: "id", //variable name
     },
     {
     type: "input", 
     message: "Please enter the intern email: ", //question 
-    name: "internEmail", //variable name
+    name: "email", //variable name
     },
     {
     type: "input", 
     message: "Please enter intern school name: ", //question 
-    name: "internSchool", //variable name
+    name: "school", //variable name
     },
 
 ];
@@ -94,9 +112,12 @@ const internQuestions = [ // array of questions for user
 function handleManagerQuestions() { //function to handle all of manager questions
 
     inquirer.prompt(managerQuestions) 
-    .then(function(managerresponse) {
-        
-         addEmployee(); //directing manager to add employee function 
+    .then(function(response) {
+        const newManager = new Manager(response.name, response.id, response.email, response.officeNumber)
+        teamMembers.push(newManager);
+
+        //console.log(managerresponse)
+        addEmployee(); //directing manager to add employee 
         
     });
 };
@@ -115,9 +136,9 @@ function addEmployee() { //function to handle user inputing different employees
         else if (response.employeeType === "Intern") { //if intern is selected 
             handleInternQuestions();
         }
-        else if (response.employeeType === "No more employees to add!") { //no more employees to add
+        else { //no more employees to add, catch all
             console.log("Thank you for providing the employee information!")
-            //render HTML
+            renderHTML();  //render HTML
         }
      
     });
@@ -125,9 +146,11 @@ function addEmployee() { //function to handle user inputing different employees
 
 function handleEngineerQuestions() { //function to handle user inputing enginner data
     inquirer.prompt(engineerQuestions) 
-    .then(function(responseEngineer) {
+    .then(function(response) {
 
-        console.log(responseEngineer);
+        //console.log(response);
+        const newEngineer = new Engineer(response.name, response.id, response.email, response.github)
+        teamMembers.push(newEngineer);
         addEmployee();
         
     });
@@ -135,8 +158,8 @@ function handleEngineerQuestions() { //function to handle user inputing enginner
 };
 
 function handleInternQuestions() { //function to 
-    inquirer.prompt(engineerQuestions) 
-    .then(function(response) {
+    inquirer.prompt(internQuestions, Intern) 
+    .then(function(responseIntern) {
     
          addEmployee();
         
