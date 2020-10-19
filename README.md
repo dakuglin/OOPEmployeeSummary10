@@ -5,7 +5,11 @@
 
 ## Description 
 
-This project takes questions from user input using the inquirer package in node. The question responses get run throught a constructor function. 
+This project takes questions from user input using the inquirer package in node. The important take-away of this assignment is that it creates different objects that have slightly different data, which can be resued over and over. This data gest pushed to to an HTML with all of the information provided by the user. 
+
+Each employee type has thier own constructor information that extends from the Employee constructor function. The purpose of keeping all objects seperate is so they can be used as templates and called upon as needed based on how many interns or engineers the user needs to add to the HTML. 
+
+Overall, the user of this code can quickly create an employee summary easily after answering some questions, and keeping constructor functions and classes separate allow for easy reuse of objets and create as many employee positions as they need. 
 
 
 ## Table of Contents 
@@ -31,11 +35,21 @@ Steps to install my project include:
 
 ## Usage 
 
-![Getting Started](./pictures/link)
-* 
+![Getting Started](./pictures/managerQuestions.PNG)
+* First start by providing information about the Manager. After, you will be prompeted to add additional employees. 
 
-![Getting Started](./pictures/link)
-* 
+![Getting Started](./pictures/engineerQuestions.PNG)
+* When adding an engineer employee user will be prompted with additional questions, and asked again if they would like to add more employees or exit. 
+
+![Getting Started](./pictures/internQuestions.PNG)
+* When adding an intern employee user will be prompted with additional questions, and asked again if they would like to add more employees or exit. 
+
+![Getting Started](./pictures/noMoreQuestions.PNG)
+* One the user is done adding employees they can select "No more employees to add!" and exit the quesitons process. 
+
+![Getting Started](./pictures/finalHtml.PNG)
+* An HTML is generated with all of the user information. 
+
 
 ## Credits
 
