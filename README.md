@@ -24,7 +24,7 @@ Overall, the user of this code can quickly create an employee summary easily aft
 
 ## Video
 
-![Walkthrough Video](./link)
+![Walkthrough Video](./employeeSummaryGen.gif)
 
 
 ## Installation
