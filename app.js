@@ -8,8 +8,7 @@ const fs = require("fs");
 const OUTPUT_DIR = path.resolve(__dirname, "output"); //make this folder if it does not exist
 const outputPath = path.join(OUTPUT_DIR, "team.html"); //
 
-const teamMembers = [];
-//const idArray = [];
+const teamMembers = []; //array we will push our user inputs to to display on the team.html
 
 const render = require("./lib/htmlRenderer");
 
@@ -98,10 +97,18 @@ function handleManagerQuestions() { //function to handle all of manager question
 
     inquirer.prompt(managerQuestions) 
     .then(function(response) {
+
+        function validateOffice() {
+            if (response.officeNumber < 0 ) {
+                alert("Please enter a number greater than zero!");
+                return false;
+            }
+        }
+        validateOffice()
+
         const newManager = new Manager(response.name, response.id, response.email, response.officeNumber)
         teamMembers.push(newManager);
 
-        //console.log(managerresponse)
         addEmployee(); //directing manager to add employee 
         
     });
@@ -165,7 +172,7 @@ function renderHTML() {
         if (err) {
             console.log("Error!");
         }
-        console.log("Success!");
+        console.log("Successfully created employee html!");
     
     })
 

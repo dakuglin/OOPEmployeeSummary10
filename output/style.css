@@ -1,0 +1,16 @@
+.jumbotron {
+    color: black;
+    background-color: rgb(208, 223, 228);
+}
+
+body {
+    background-color: whitesmoke;
+}
+
+h3 {
+    font-style: italic;
+}
+
+.fas {
+    color: rgb(11, 90, 90);
+}
